@@ -3,13 +3,27 @@ package com.example.myapplication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
@@ -22,11 +36,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.ui.theme.*
-import com.example.myapplication.LoginScreen
-import com.example.myapplication.RegisterScreen
-import com.example.myapplication.DetailsCard
-import com.example.myapplication.MyCard
+import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.example.myapplication.ui.theme.pastelBrown
 
 val montserrat = FontFamily(
     Font(R.font.mlight, FontWeight.Light),
@@ -46,7 +57,7 @@ class MainActivity : ComponentActivity() {
                             title = {
                                 Text(
                                     text = "My TopBar",
-                                    color = Color.Black,
+                                    color = Color.White,
                                     fontFamily = montserrat
                                 )
                             },
@@ -60,6 +71,12 @@ class MainActivity : ComponentActivity() {
                                         color = MaterialTheme.colorScheme.onPrimary,
                                         fontFamily = montserrat,
                                     )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Icon(
+                                        imageVector = Icons.Filled.ExitToApp, // Gunakan icon Material
+                                        contentDescription = "Login Icon",
+                                        tint = MaterialTheme.colorScheme.onPrimary
+                                    )
                                 }
                             },
                             colors = TopAppBarDefaults.topAppBarColors(
@@ -69,22 +86,7 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                     bottomBar = {
-                        BottomAppBar(
-                            containerColor = pastelBrown,
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = "BottomBar Content",
-                                    color = Color.White,
-                                    fontFamily = montserrat
-                                )
-                            }
-                        }
+                        BottomApp()
                     },
                     content = { padding ->
                         NavigationHost(navController = navController, padding = padding)
@@ -94,6 +96,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 
 @Composable
 fun NavigationHost(navController: NavHostController, padding: PaddingValues) {
@@ -120,6 +123,7 @@ fun HomeScreen(navController: NavController, padding: PaddingValues) {
         MyCard(content = "Ini adalah Card kedua!", navController = navController)
         MyCard(content = "Ini adalah Card ketiga!", navController = navController)
         MyCard(content = "Ini adalah Card keempat!", navController = navController)
+        MyCard(content = "Ini adalah Card kelima!", navController = navController)
     }
 }
 // Preview
